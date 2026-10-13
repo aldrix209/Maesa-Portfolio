@@ -177,10 +177,10 @@
             <article class="project-card glass-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between group cursor-pointer border border-white/10" data-category="enterprise" onclick="openProjectModal('nxtgen')">
                 <div class="space-y-5">
                     
-                    <!-- App Mockup Visual -->
-                    <div class="h-56 rounded-2xl overflow-hidden bg-slate-950 border border-white/10 relative p-4 flex flex-col justify-between group-hover:border-emerald-500/40 transition-colors shadow-inner">
-                        <!-- Window Header -->
-                        <div class="flex items-center justify-between text-xs text-slate-400 border-b border-white/10 pb-2">
+                    <!-- App Mockup Visual with Real Screenshot -->
+                    <div class="h-60 rounded-2xl overflow-hidden bg-slate-950 border border-white/10 relative flex flex-col justify-between group-hover:border-emerald-500/40 transition-colors shadow-2xl">
+                        <!-- Window Titlebar -->
+                        <div class="flex items-center justify-between text-xs text-slate-400 border-b border-white/10 px-4 py-2 bg-slate-900/90 backdrop-blur z-10">
                             <div class="flex items-center gap-1.5">
                                 <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
                                 <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
@@ -190,26 +190,15 @@
                             <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">Secure ACID DB</span>
                         </div>
 
-                        <!-- Banking UI Preview Simulation -->
-                        <div class="my-auto space-y-3 p-2">
-                            <div class="flex items-center justify-between bg-emerald-950/40 border border-emerald-500/20 p-3 rounded-xl">
-                                <div>
-                                    <div class="text-[10px] uppercase font-mono text-emerald-300">Account Balance</div>
-                                    <div class="text-2xl font-bold font-mono text-white">₱ 248,500.00</div>
-                                </div>
-                                <i data-lucide="shield-check" class="w-7 h-7 text-emerald-400"></i>
-                            </div>
-
-                            <div class="grid grid-cols-3 gap-2 text-center text-[10px] font-mono">
-                                <div class="bg-white/5 p-2 rounded-lg text-slate-300">Deposit</div>
-                                <div class="bg-white/5 p-2 rounded-lg text-slate-300">Withdraw</div>
-                                <div class="bg-white/5 p-2 rounded-lg text-slate-300">Transfer</div>
-                            </div>
+                        <!-- Real Screenshot Image -->
+                        <div class="relative w-full h-full overflow-hidden bg-slate-900 flex items-center justify-center">
+                            <img src="{{ asset('images/nxtgn-bank/dashboard.png') }}" alt="NxtGen Bank Dashboard" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent"></div>
                         </div>
 
-                        <div class="flex items-center justify-between text-[10px] font-mono text-slate-400 border-t border-white/5 pt-2">
+                        <div class="flex items-center justify-between text-[10px] font-mono text-slate-400 border-t border-white/10 px-4 py-2 bg-slate-900/90 backdrop-blur z-10">
                             <span>Java & MySQL</span>
-                            <span>Swing GUI Engine</span>
+                            <span class="text-emerald-400">Core Financial Engine</span>
                         </div>
                     </div>
 
@@ -249,9 +238,9 @@
             <article class="project-card glass-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between group cursor-pointer border border-white/10" data-category="fullstack" onclick="openProjectModal('brewvanti')">
                 <div class="space-y-5">
                     
-                    <!-- App Mockup Visual -->
-                    <div class="h-56 rounded-2xl overflow-hidden bg-gradient-to-br from-[#1a1510] via-slate-950 to-black border border-white/10 relative p-4 flex flex-col justify-between group-hover:border-amber-500/40 transition-colors shadow-inner">
-                        <div class="flex items-center justify-between text-xs text-slate-400 border-b border-white/10 pb-2">
+                    <!-- App Mockup Visual with Real Screenshot -->
+                    <div class="h-60 rounded-2xl overflow-hidden bg-gradient-to-br from-[#1a1510] via-slate-950 to-black border border-white/10 relative flex flex-col justify-between group-hover:border-amber-500/40 transition-colors shadow-2xl">
+                        <div class="flex items-center justify-between text-xs text-slate-400 border-b border-white/10 px-4 py-2 bg-slate-900/90 backdrop-blur z-10">
                             <div class="flex items-center gap-1.5">
                                 <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
                                 <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
@@ -261,25 +250,15 @@
                             <span class="text-[10px] font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-full">Real-time Orders</span>
                         </div>
 
-                        <div class="my-auto space-y-2.5 p-2">
-                            <div class="flex items-center justify-between bg-amber-950/30 border border-amber-500/20 p-3 rounded-xl">
-                                <div>
-                                    <div class="text-[10px] uppercase font-mono text-amber-300">Daily Sales Telemetry</div>
-                                    <div class="text-xl font-bold font-mono text-white">₱ 42,910.50</div>
-                                </div>
-                                <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded">+18.4%</span>
-                            </div>
-
-                            <div class="grid grid-cols-3 gap-1.5 text-[9px] font-mono text-slate-400">
-                                <div class="bg-white/5 p-1.5 rounded text-center">Espresso (142)</div>
-                                <div class="bg-white/5 p-1.5 rounded text-center">Cold Brew (89)</div>
-                                <div class="bg-white/5 p-1.5 rounded text-center">Pastries (64)</div>
-                            </div>
+                        <!-- Real Screenshot Image -->
+                        <div class="relative w-full h-full overflow-hidden bg-slate-900 flex items-center justify-center">
+                            <img src="{{ asset('images/brewvanti/pos-terminal.png') }}" alt="BrewVanti POS Terminal" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent"></div>
                         </div>
 
-                        <div class="flex items-center justify-between text-[10px] font-mono text-slate-400 border-t border-white/5 pt-2">
+                        <div class="flex items-center justify-between text-[10px] font-mono text-slate-400 border-t border-white/10 px-4 py-2 bg-slate-900/90 backdrop-blur z-10">
                             <span>POS Terminal</span>
-                            <span>Inventory & Finance</span>
+                            <span class="text-amber-400">Inventory & Finance</span>
                         </div>
                     </div>
 
@@ -319,37 +298,27 @@
             <article class="project-card glass-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between group cursor-pointer border border-white/10" data-category="web" onclick="openProjectModal('appointmed')">
                 <div class="space-y-5">
                     
-                    <!-- App Mockup Visual -->
-                    <div class="h-56 rounded-2xl overflow-hidden bg-slate-900 border border-white/10 relative p-4 flex flex-col justify-between group-hover:border-cyan-500/40 transition-colors shadow-inner">
-                        <div class="flex items-center justify-between text-xs text-slate-400 border-b border-white/10 pb-2">
+                    <!-- App Mockup Visual with Real Screenshot -->
+                    <div class="h-60 rounded-2xl overflow-hidden bg-slate-900 border border-white/10 relative flex flex-col justify-between group-hover:border-cyan-500/40 transition-colors shadow-2xl">
+                        <div class="flex items-center justify-between text-xs text-slate-400 border-b border-white/10 px-4 py-2 bg-slate-900/90 backdrop-blur z-10">
                             <div class="flex items-center gap-1.5">
                                 <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
                                 <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
                                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
                                 <span class="font-mono text-[11px] text-slate-300 ml-2">AppointMed • Clinical System</span>
                             </div>
-                            <span class="text-[10px] font-mono text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-full">HIPAA Compliant UI</span>
+                            <span class="text-[10px] font-mono text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-full">Patient Portal</span>
                         </div>
 
-                        <div class="my-auto space-y-2 p-2">
-                            <div class="bg-cyan-950/30 border border-cyan-500/20 p-3 rounded-xl flex items-center justify-between">
-                                <div>
-                                    <div class="text-[10px] uppercase font-mono text-cyan-300">Upcoming Appointments</div>
-                                    <div class="text-lg font-bold font-mono text-white">Dr. Sarah Jenkins, MD</div>
-                                </div>
-                                <span class="text-xs font-mono text-cyan-400">10:30 AM</span>
-                            </div>
-
-                            <div class="flex items-center gap-2 text-[10px] font-mono text-slate-400">
-                                <span class="bg-white/5 px-2 py-1 rounded">Cardiology</span>
-                                <span class="bg-white/5 px-2 py-1 rounded">Pediatrics</span>
-                                <span class="bg-white/5 px-2 py-1 rounded">Teleconsult</span>
-                            </div>
+                        <!-- Real Screenshot Image -->
+                        <div class="relative w-full h-full overflow-hidden bg-slate-900 flex items-center justify-center">
+                            <img src="{{ asset('images/appointmed/dashboard.png') }}" alt="AppointMed Patient Portal" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent"></div>
                         </div>
 
-                        <div class="flex items-center justify-between text-[10px] font-mono text-slate-400 border-t border-white/5 pt-2">
+                        <div class="flex items-center justify-between text-[10px] font-mono text-slate-400 border-t border-white/10 px-4 py-2 bg-slate-900/90 backdrop-blur z-10">
                             <span>HTML5 • CSS3 • JavaScript</span>
-                            <span>Accessible Web UI</span>
+                            <span class="text-cyan-400">Accessible Web UI</span>
                         </div>
                     </div>
 
@@ -389,9 +358,9 @@
             <article class="project-card glass-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between group cursor-pointer border border-white/10" data-category="fullstack" onclick="openProjectModal('adaptive')">
                 <div class="space-y-5">
                     
-                    <!-- App Mockup Visual -->
-                    <div class="h-56 rounded-2xl overflow-hidden bg-slate-950 border border-white/10 relative p-4 flex flex-col justify-between group-hover:border-purple-500/40 transition-colors shadow-inner">
-                        <div class="flex items-center justify-between text-xs text-slate-400 border-b border-white/10 pb-2">
+                    <!-- App Mockup Visual with Real Screenshot -->
+                    <div class="h-60 rounded-2xl overflow-hidden bg-slate-950 border border-white/10 relative flex flex-col justify-between group-hover:border-purple-500/40 transition-colors shadow-2xl">
+                        <div class="flex items-center justify-between text-xs text-slate-400 border-b border-white/10 px-4 py-2 bg-slate-900/90 backdrop-blur z-10">
                             <div class="flex items-center gap-1.5">
                                 <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
                                 <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
@@ -401,23 +370,15 @@
                             <span class="text-[10px] font-mono text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded-full">AI Synthesis</span>
                         </div>
 
-                        <div class="my-auto space-y-2 p-2">
-                            <div class="bg-purple-950/30 border border-purple-500/20 p-3 rounded-xl flex items-center justify-between">
-                                <div>
-                                    <div class="text-[10px] uppercase font-mono text-purple-300">Material Stress Telemetry</div>
-                                    <div class="text-lg font-bold font-mono text-white">99.4% Elastic Modulus</div>
-                                </div>
-                                <i data-lucide="activity" class="w-6 h-6 text-purple-400"></i>
-                            </div>
-
-                            <div class="w-full bg-white/5 h-2 rounded-full overflow-hidden">
-                                <div class="bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-400 h-full w-4/5 rounded-full"></div>
-                            </div>
+                        <!-- Real Screenshot Image -->
+                        <div class="relative w-full h-full overflow-hidden bg-slate-900 flex items-center justify-center">
+                            <img src="{{ asset('images/adaptive-analysis/dashboard.png') }}" alt="Adaptive Material Analysis Dashboard" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent"></div>
                         </div>
 
-                        <div class="flex items-center justify-between text-[10px] font-mono text-slate-400 border-t border-white/5 pt-2">
+                        <div class="flex items-center justify-between text-[10px] font-mono text-slate-400 border-t border-white/10 px-4 py-2 bg-slate-900/90 backdrop-blur z-10">
                             <span>Vue 3 • Laravel API</span>
-                            <span>Predictive Model</span>
+                            <span class="text-purple-400">Predictive Model</span>
                         </div>
                     </div>
 
