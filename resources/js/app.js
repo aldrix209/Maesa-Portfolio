@@ -1,17 +1,35 @@
 import * as THREE from 'three';
 import { createIcons, icons } from 'lucide';
 
-// Initialize Lucide Icons
 document.addEventListener('DOMContentLoaded', () => {
+    // 1. Initialize Lucide Icons
     createIcons({ icons });
 
-    // Dynamic Copyright Year
+    // 2. Dynamic Year
     const yearElem = document.getElementById('year');
     if (yearElem) {
         yearElem.textContent = new Date().getFullYear();
     }
 
-    // Mobile Menu Toggle
+    // 3. Live Manila Clock (UTC+8)
+    const clockElem = document.getElementById('liveManilaClock');
+    if (clockElem) {
+        function updateClock() {
+            const now = new Date();
+            const options = {
+                timeZone: 'Asia/Manila',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            };
+            clockElem.textContent = new Intl.DateTimeFormat('en-US', options).format(now);
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+    }
+
+    // 4. Mobile Menu Toggle
     const mobileBtn = document.getElementById('mobileToggle');
     const mobileMenu = document.getElementById('mobileMenu');
     if (mobileBtn && mobileMenu) {
@@ -23,9 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Clipboard Copy Toast
+    // 5. Toast Notification System
     const toast = document.getElementById('toast');
-    window.copyEmail = function (email = 'maesa.creates@gmail.com') {
+    window.copyEmail = function (email = 'Aldrixmaesa4@gmail.com') {
         navigator.clipboard.writeText(email).then(() => {
             if (toast) {
                 toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-2');
@@ -38,41 +56,69 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    const quickCopy = document.getElementById('quickCopyEmail');
-    if (quickCopy) quickCopy.addEventListener('click', () => window.copyEmail());
+    const heroCopy = document.getElementById('heroCopyEmail');
+    if (heroCopy) heroCopy.addEventListener('click', () => window.copyEmail());
 
     const contactCopy = document.getElementById('contactCopyEmail');
     if (contactCopy) contactCopy.addEventListener('click', () => window.copyEmail());
 
-    // Project Modal Data & Logic
+    // 6. Interactive Category Filter Tabs
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Update active styles
+            filterTabs.forEach(t => {
+                t.className = 'filter-tab px-4 py-1.5 rounded-full text-xs font-medium glass-pill text-slate-300 hover:text-white transition-all';
+            });
+            tab.className = 'filter-tab px-4 py-1.5 rounded-full text-xs font-semibold bg-white text-black transition-all';
+
+            const filter = tab.getAttribute('data-filter');
+            projectCards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                if (filter === 'all' || category === filter) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    // 7. Case Study Modal Data & Handlers
     const projectDetails = {
-        quantum: {
-            title: "Quantum Analytics Platform",
-            category: "Fintech & WebGL Telemetry",
-            desc: "Designed and engineered a high-throughput financial telemetry platform handling real-time streams with sub-50ms latency. Implemented modular widget architecture and custom WebGL data visualizers.",
-            tags: ["UI/UX", "React", "3D", "WebGL", "Tailwind"],
-            bannerText: "Quantum Analytics • GPU Accelerated"
+        nxtgen: {
+            title: "NxtGen Bank",
+            category: "Enterprise Desktop Banking System",
+            desc: "Architected a full-featured standalone desktop banking system designed for high reliability, atomic financial transactions, and secure ledger bookkeeping. Features an intuitive Java Swing GUI backed by a normalized MySQL relational schema.",
+            tags: ["Java", "MySQL", "Swing GUI", "JDBC", "ACID Compliance", "Security"],
+            bannerTitle: "NxtGen Core Banking System",
+            icon: "B"
         },
-        artemis: {
-            title: "Artemis e-Commerce Storefront",
-            category: "Creative Commerce & Brand",
-            desc: "A boutique luxury storefront focused on sensory photography, seamless product transitions, and a streamlined frictionless one-step checkout process with 42% higher conversion rate.",
-            tags: ["UI/UX", "Next.js", "Shopify", "Tailwind"],
-            bannerText: "Artemis • Minimalist Luxury"
+        brewvanti: {
+            title: "BrewVanti POS & Storefront",
+            category: "Commercial ERP & Food Service Point-of-Sale",
+            desc: "Engineered a commercial POS and inventory telemetry suite for retail coffee shops and food enterprises. Features real-time stock deductions, multi-tender transactions, sales forecasting, and an intuitive cashier touch-screen interface.",
+            tags: ["Laravel", "Vue 3", "Tailwind CSS", "MySQL", "Inventory Telemetry", "Receipt Engine"],
+            bannerTitle: "BrewVanti Commercial POS Terminal",
+            icon: "P"
         },
-        nexio: {
-            title: "Nexio Cloud Platform",
-            category: "Enterprise Cloud Console",
-            desc: "Redesigned complex multi-cluster cloud management software. Reduced onboarding friction and system administration errors by introducing intuitive visual dependency trees.",
-            tags: ["UI/UX", "React", "TypeScript", "Design Systems"],
-            bannerText: "Nexio • Enterprise Console"
+        appointmed: {
+            title: "AppointMed Patient Portal",
+            category: "Clinical Scheduling & Healthcare System",
+            desc: "Designed an accessible, human-centered medical appointment and clinical scheduling platform. Allows patients to browse healthcare specialists, book time slots in real time, and view digital consultation slips without friction.",
+            tags: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Healthcare UX", "Accessibility"],
+            bannerTitle: "AppointMed Healthcare Portal",
+            icon: "M"
         },
-        vibe: {
-            title: "Vibe Spatial Social Feed",
-            category: "Next-Gen Mobile & Web Social",
-            desc: "An experimental social audio and spatial canvas application featuring real-time collaborative avatars, fluid gestures, and personalized gradient identities.",
-            tags: ["UI/UX", "React Native", "Three.js", "WebRTC"],
-            bannerText: "Vibe Social • Spatial Hub"
+        adaptive: {
+            title: "Adaptive Material Analysis",
+            category: "Scientific Telemetry & Stress Modeling",
+            desc: "Developed an interactive scientific telemetry application simulating physical material stress thresholds and elasticity metrics. Integrates responsive interactive charts, automated report compilation, and modular Vue 3 interface components.",
+            tags: ["Vue 3", "Laravel API", "Chart.js", "AI Analysis", "Tailwind CSS", "Data Vis"],
+            bannerTitle: "Adaptive Material Stress Visualizer",
+            icon: "A"
         }
     };
 
@@ -81,7 +127,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalTitle = document.getElementById('modalTitle');
     const modalCategory = document.getElementById('modalCategory');
     const modalDesc = document.getElementById('modalDesc');
-    const modalBanner = document.getElementById('modalBanner');
+    const modalBannerTitle = document.getElementById('modalBannerTitle');
+    const modalIconPreview = document.getElementById('modalIconPreview');
     const modalTags = document.getElementById('modalTags');
 
     window.openProjectModal = function (id) {
@@ -90,8 +137,10 @@ document.addEventListener('DOMContentLoaded', () => {
         modalTitle.textContent = p.title;
         modalCategory.textContent = p.category;
         modalDesc.textContent = p.desc;
-        modalBanner.textContent = p.bannerText;
-        modalTags.innerHTML = p.tags.map(t => `<span class="px-2 py-0.5 rounded-full text-[10px] bg-white/5 text-slate-300 border border-white/5">${t}</span>`).join('');
+        if (modalBannerTitle) modalBannerTitle.textContent = p.bannerTitle;
+        if (modalIconPreview) modalIconPreview.textContent = p.icon;
+
+        modalTags.innerHTML = p.tags.map(t => `<span class="px-2.5 py-1 rounded-md text-[11px] bg-white/5 text-slate-300 border border-white/5 font-mono">${t}</span>`).join('');
 
         modal.classList.remove('opacity-0', 'pointer-events-none');
         modalCard.classList.remove('scale-95');
@@ -111,121 +160,125 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Three.js Iridescent 3D Interactive Canvas
-    initThreeJs();
+    // 8. Three.js Prismatic Crystal Visualizer
+    initPrismaticCrystal();
 });
 
-function initThreeJs() {
+// THREE.JS PRISMATIC CRYSTAL ENGINE
+function initPrismaticCrystal() {
     const container = document.getElementById('threeCanvasContainer');
     if (!container) return;
 
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-    camera.position.z = 7;
+    const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000);
+    camera.position.z = 5.2;
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer);
 
-    const cluster = new THREE.Group();
-    scene.add(cluster);
+    const group = new THREE.Group();
+    scene.add(group);
 
-    const iridescentMaterial = new THREE.MeshPhysicalMaterial({
-        color: 0x9333ea,
-        emissive: 0x1e1035,
-        roughness: 0.18,
-        metalness: 0.9,
+    // 1. Outer Faceted Crystal (Icosahedron)
+    const crystalGeo = new THREE.IcosahedronGeometry(1.4, 0);
+    
+    // Iridescent Prismatic Material with High Refraction & Metalness
+    const crystalMat = new THREE.MeshPhysicalMaterial({
+        color: 0xffffff,
+        emissive: 0x1e153b,
+        roughness: 0.12,
+        metalness: 0.88,
         clearcoat: 1.0,
-        clearcoatRoughness: 0.1,
-        reflectivity: 0.9
+        clearcoatRoughness: 0.08,
+        transmission: 0.35,
+        opacity: 0.95,
+        transparent: true,
+        reflectivity: 1.0,
+        flatShading: true
     });
 
-    const cyanMaterial = new THREE.MeshPhysicalMaterial({
+    const crystalMesh = new THREE.Mesh(crystalGeo, crystalMat);
+    group.add(crystalMesh);
+
+    // 2. Wireframe Cage Accent
+    const wireframeMat = new THREE.MeshBasicMaterial({
         color: 0x06b6d4,
-        emissive: 0x082f49,
-        roughness: 0.2,
-        metalness: 0.85,
-        clearcoat: 1.0,
-        clearcoatRoughness: 0.1
+        wireframe: true,
+        transparent: true,
+        opacity: 0.4
     });
+    const wireframeMesh = new THREE.Mesh(crystalGeo, wireframeMat);
+    wireframeMesh.scale.set(1.02, 1.02, 1.02);
+    group.add(wireframeMesh);
 
-    // 1. Central Torus Knot
-    const centralKnotGeo = new THREE.TorusKnotGeometry(1.2, 0.35, 120, 20, 2, 3);
-    const centralKnot = new THREE.Mesh(centralKnotGeo, iridescentMaterial);
-    cluster.add(centralKnot);
+    // 3. Inner Glowing Core
+    const coreGeo = new THREE.OctahedronGeometry(0.7, 0);
+    const coreMat = new THREE.MeshStandardMaterial({
+        color: 0xa855f7,
+        emissive: 0x9333ea,
+        emissiveIntensity: 0.9,
+        roughness: 0.2,
+        metalness: 0.8
+    });
+    const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+    group.add(coreMesh);
 
-    // 2. Floating Torus Ring
-    const ringGeo = new THREE.TorusGeometry(0.8, 0.18, 16, 50);
-    const ring = new THREE.Mesh(ringGeo, cyanMaterial);
-    ring.position.set(-1.8, -1.1, 0.5);
-    ring.rotation.x = 1.2;
-    cluster.add(ring);
-
-    // 3. Floating 3D Cube
-    const cubeGeo = new THREE.BoxGeometry(0.75, 0.75, 0.75);
-    const cube = new THREE.Mesh(cubeGeo, iridescentMaterial);
-    cube.position.set(1.9, 1.4, 0.2);
-    cube.rotation.set(0.5, 0.7, 0.2);
-    cluster.add(cube);
-
-    // 4. Floating Octahedron (Diamond / Pyramid)
-    const octaGeo = new THREE.OctahedronGeometry(0.65, 0);
-    const octa = new THREE.Mesh(octaGeo, cyanMaterial);
-    octa.position.set(-1.6, 1.5, -0.4);
-    cluster.add(octa);
-
-    // 5. Floating Sphere
-    const sphereGeo = new THREE.SphereGeometry(0.28, 32, 32);
-    const sphere = new THREE.Mesh(sphereGeo, iridescentMaterial);
-    sphere.position.set(-2.2, 0.3, 0.8);
-    cluster.add(sphere);
-
-    // Ambient & Point Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+    // Dynamic Lighting
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
     scene.add(ambientLight);
 
-    const purpleLight = new THREE.PointLight(0xa855f7, 4, 20);
-    purpleLight.position.set(-4, 3, 5);
+    const purpleLight = new THREE.PointLight(0xa855f7, 5, 20);
+    purpleLight.position.set(-3, 3, 4);
     scene.add(purpleLight);
 
-    const cyanLight = new THREE.PointLight(0x06b6d4, 4, 20);
-    cyanLight.position.set(5, -3, 4);
+    const cyanLight = new THREE.PointLight(0x06b6d4, 5, 20);
+    cyanLight.position.set(3, -2, 4);
     scene.add(cyanLight);
 
-    const topLight = new THREE.DirectionalLight(0xffffff, 2);
-    topLight.position.set(0, 5, 5);
-    scene.add(topLight);
+    const pinkLight = new THREE.PointLight(0xec4899, 3, 15);
+    pinkLight.position.set(0, 4, -2);
+    scene.add(pinkLight);
 
-    // Mouse Movement Tracking
+    // Mouse Tracking Parallax
     let mouseX = 0, mouseY = 0;
     let targetX = 0, targetY = 0;
 
-    window.addEventListener('mousemove', (e) => {
+    container.addEventListener('mousemove', (e) => {
         const rect = container.getBoundingClientRect();
         mouseX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
         mouseY = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
     });
 
+    container.addEventListener('mouseleave', () => {
+        mouseX = 0;
+        mouseY = 0;
+    });
+
+    // Render Loop
     function animate() {
         requestAnimationFrame(animate);
 
-        targetX += (mouseX - targetX) * 0.05;
-        targetY += (mouseY - targetY) * 0.05;
+        targetX += (mouseX - targetX) * 0.06;
+        targetY += (mouseY - targetY) * 0.06;
 
-        centralKnot.rotation.x += 0.006;
-        centralKnot.rotation.y += 0.008;
+        // Smooth continuous rotation
+        crystalMesh.rotation.x += 0.005;
+        crystalMesh.rotation.y += 0.008;
 
-        ring.rotation.x += 0.01;
-        ring.rotation.z += 0.007;
+        wireframeMesh.rotation.x += 0.005;
+        wireframeMesh.rotation.y += 0.008;
 
-        cube.rotation.x += 0.008;
-        cube.rotation.y += 0.005;
+        coreMesh.rotation.x -= 0.009;
+        coreMesh.rotation.y -= 0.012;
 
-        octa.rotation.y += 0.012;
-
-        cluster.rotation.y = targetX * 0.45;
-        cluster.rotation.x = -targetY * 0.35;
+        // Interactive mouse tilt
+        group.rotation.y = targetX * 0.7;
+        group.rotation.x = -targetY * 0.5;
 
         renderer.render(scene, camera);
     }
@@ -233,8 +286,10 @@ function initThreeJs() {
 
     window.addEventListener('resize', () => {
         if (!container) return;
-        camera.aspect = container.clientWidth / container.clientHeight;
+        const w = container.clientWidth;
+        const h = container.clientHeight;
+        camera.aspect = w / h;
         camera.updateProjectionMatrix();
-        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setSize(w, h);
     });
 }
