@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maesa — Digital Designer & Creative Developer</title>
+  <meta name="description" content="Portfolio of Maesa: Digital Designer and Creative Developer crafting immersive digital experiences through design, development, and animation.">
+
+  <!-- Google Fonts: Space Grotesk & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Three.js CDN for interactive 3D visual cluster -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Space Grotesk"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              bg: '#08090d',
+              card: 'rgba(20, 24, 34, 0.72)',
+              border: 'rgba(255, 255, 255, 0.08)',
+              hoverBorder: 'rgba(255, 255, 255, 0.2)',
+              pill: 'rgba(255, 255, 255, 0.05)',
+              accentPurple: '#a855f7',
+              accentTeal: '#06b6d4',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #08090d;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Glassmorphism Styles */
+    .glass-nav {
+      background: rgba(14, 17, 25, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+    }
+
+    .glass-card {
+      background: rgba(20, 23, 33, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .glass-card:hover {
+      border-color: rgba(255, 255, 255, 0.22);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6), 0 0 35px -10px rgba(168, 85, 247, 0.15);
+    }
+
+    /* Ambient Lighting */
+    .ambient-glow-left {
+      position: absolute;
+      top: 15%;
+      left: -12%;
+      width: 580px;
+      height: 580px;
+      background: radial-gradient(circle, rgba(147, 51, 234, 0.14) 0%, rgba(147, 51, 234, 0) 70%);
+      pointer-events: none;
+      filter: blur(60px);
+      z-index: 0;
+    }
+
+    .ambient-glow-right {
+      position: absolute;
+      top: 10%;
+      right: -10%;
+      width: 650px;
+      height: 650px;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.14) 0%, rgba(6, 182, 212, 0) 70%);
+      pointer-events: none;
+      filter: blur(70px);
+      z-index: 0;
+    }
+  </style>
+</head>
+<body class="bg-[#08090d] text-slate-100 font-sans antialiased selection:bg-purple-500/30 selection:text-white min-h-screen relative overflow-x-hidden">
+
+  <!-- Ambient Light Orbs -->
+  <div class="ambient-glow-left"></div>
+  <div class="ambient-glow-right"></div>
+
+  <!-- HEADER / NAVIGATION (Exact match to design) -->
+  <header class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-8 py-5 transition-all duration-300" id="navbar">
+    <div class="max-w-7xl mx-auto flex items-center justify-between glass-nav px-6 py-3.5 rounded-2xl shadow-2xl">
+      
+      <!-- Brand Logo -->
+      <a href="#hero" class="text-xl sm:text-2xl font-display font-extrabold tracking-tight text-white hover:opacity-90 transition-opacity">
+        Maesa
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="#work" class="hover:text-white transition-colors">Work</a>
+        <a href="#about" class="hover:text-white transition-colors">About</a>
+        <a href="#services" class="hover:text-white transition-colors">Services</a>
+        <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+      </nav>
+
+      <!-- Status Pill Badge -->
+      <div class="flex items-center gap-3">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium border border-emerald-500/25 bg-emerald-500/10 text-emerald-400">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>Status: <strong class="text-emerald-300 font-semibold">Open to Work</strong></span>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobileToggle" class="md:hidden p-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-colors">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Menu Drawer -->
+    <div id="mobileMenu" class="hidden md:hidden max-w-7xl mx-auto mt-2 glass-nav rounded-2xl p-4 flex flex-col gap-2">
+      <a href="#work" class="mobile-nav-link px-4 py-2 rounded-lg text-sm text-slate-300 hover:text-white hover:bg-white/5">Work</a>
+      <a href="#about" class="mobile-nav-link px-4 py-2 rounded-lg text-sm text-slate-300 hover:text-white hover:bg-white/5">About</a>
+      <a href="#services" class="mobile-nav-link px-4 py-2 rounded-lg text-sm text-slate-300 hover:text-white hover:bg-white/5">Services</a>
+      <a href="#contact" class="mobile-nav-link px-4 py-2 rounded-lg text-sm text-slate-300 hover:text-white hover:bg-white/5">Contact</a>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-8 pt-36 pb-24 space-y-24 relative z-10">
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[460px]">
+      
+      <!-- Left Column: Headline & Subheadline -->
+      <div class="lg:col-span-7 space-y-6">
+        <h1 class="text-4xl sm:text-6xl lg:text-[68px] font-display font-extrabold tracking-tight leading-[1.08] text-white">
+          Maesa — Digital Designer & Creative Developer
+        </h1>
+        <p class="text-base sm:text-xl text-slate-400 max-w-xl font-normal leading-relaxed">
+          Crafting immersive digital experiences through design, development, and animation.
+        </p>
+
+        <!-- Quick Interactive Actions -->
+        <div class="flex flex-wrap items-center gap-4 pt-2">
+          <a href="#work" class="px-6 py-3 rounded-full text-xs font-semibold bg-white text-black hover:bg-slate-200 transition-all hover:scale-105 flex items-center gap-2 shadow-xl">
+            <span>Explore Works</span>
+            <i data-lucide="arrow-down" class="w-3.5 h-3.5"></i>
+          </a>
+          
+          <button id="quickCopyEmail" class="px-5 py-3 rounded-full text-xs font-medium glass-card hover:bg-white/10 text-slate-300 hover:text-white transition-all flex items-center gap-2">
+            <i data-lucide="copy" class="w-3.5 h-3.5 text-purple-400"></i>
+            <span>maesa.creates@gmail.com</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive 3D Canvas Visualizer -->
+      <div class="lg:col-span-5 relative h-[380px] sm:h-[440px] flex items-center justify-center">
+        <!-- 3D Canvas element -->
+        <div id="threeCanvasContainer" class="w-full h-full relative cursor-grab active:cursor-grabbing"></div>
+        <div class="absolute bottom-2 text-center text-[11px] text-slate-500 font-mono tracking-wider pointer-events-none">
+          Interactive 3D • Move cursor to orbit
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SELECTED WORKS / BENTO PROJECT ROW (Exact 4 Cards from Design) -->
+    <section id="work" class="space-y-6">
+      
+      <div class="flex items-center justify-between">
+        <div>
+          <span class="text-xs uppercase font-mono tracking-widest text-purple-400">Featured Showcase</span>
+          <h2 class="text-2xl sm:text-3xl font-display font-bold text-white mt-1">Selected Projects</h2>
+        </div>
+        <span class="text-xs text-slate-400 font-mono">04 Curated Works</span>
+      </div>
+
+      <!-- Projects 4-Card Responsive Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+
+        <!-- Card 1: Quantum Analytics -->
+        <article class="glass-card rounded-2xl p-5 flex flex-col justify-between group cursor-pointer" onclick="openProjectModal('quantum')">
+          <div class="space-y-4">
+            <!-- Thumbnail Visual -->
+            <div class="h-44 rounded-xl overflow-hidden bg-slate-900 border border-white/10 relative flex items-center justify-center group-hover:border-purple-500/40 transition-colors">
+              <!-- Mock Dashboard UI -->
+              <div class="w-full h-full p-3 bg-gradient-to-br from-slate-950 via-[#10131d] to-[#151927] flex flex-col justify-between">
+                <div class="flex items-center justify-between text-[10px] text-slate-400 border-b border-white/5 pb-1.5">
+                  <span class="font-mono text-purple-400">Quantum Live</span>
+                  <span>Telemetry</span>
+                </div>
+                <!-- Play button / visual chart center -->
+                <div class="my-auto flex items-center justify-center">
+                  <div class="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white group-hover:scale-110 group-hover:bg-purple-600 transition-all shadow-lg">
+                    <i data-lucide="play" class="w-4 h-4 fill-white ml-0.5"></i>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between text-[9px] text-slate-400">
+                  <span class="text-purple-300">GPU Acceleration</span>
+                  <span>60 FPS</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Title & Tags -->
+            <div class="space-y-2">
+              <h3 class="text-lg font-display font-bold text-white group-hover:text-purple-300 transition-colors">
+                Quantum Analytics
+              </h3>
+              
+              <!-- Tag Pills -->
+              <div class="flex flex-wrap gap-1.5">
+                <span class="px-2 py-0.5 rounded-full text-[10px] bg-white/5 text-slate-300 border border-white/5">UI/UX</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] bg-white/5 text-slate-300 border border-white/5">React</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] bg-white/5 text-slate-300 border border-white/5">3D</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] bg-white/5 text-slate-300 border border-white/5">WebGL</span>
+              </div>
+
+              <p class="text-xs text-slate-400 line-clamp-2 leading-relaxed">
+                Craft immersive digital experiences through design, development, and animation.
+              </p>
+            </div>
+          </div>
+
+          <!-- Bottom Card Controls & Stats -->
+          <div class="pt-5 mt-4 border-t border-white/5 flex items-center justify-between">
+            <button class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white text-black hover:bg-slate-200 transition-all flex items-center gap-1.5">
+              <span>View Live</span>
+              <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+            </button>
+            <div class="text-right">
+              <div class="text-xs font-bold font-display text-white">+15k <span class="text-[10px] text-slate-400 font-normal">Users</span></div>
+              <div class="text-[10px] text-emerald-400 font-mono">98% Perf</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2: Artemis e-Comm -->
+        <article class="glass-card rounded-2xl p-5 flex flex-col justify-between group cursor-pointer" onclick="openProjectModal('artemis')">
+          <div class="space-y-4">
+            <!-- Thumbnail Visual -->
+            <div class="h-44 rounded-xl overflow-hidden bg-slate-100 border border-white/10 relative p-3 flex flex-col justify-between group-hover:border-cyan-500/40 transition-colors">
+              <div class="flex items-center justify-between text-[10px] text-slate-600 border-b border-slate-200 pb-1.5">
+                <span class="font-bold text-slate-900">Artemis</span>
+                <span class="text-[9px] bg-slate-200 px-1.5 py-0.5 rounded">Storefront</span>
+              </div>
+              <!-- Clean minimal card inside preview -->
+              <div class="grid grid-cols-2 gap-2 my-auto">
+                <div class="h-16 rounded-lg bg-slate-200/90 border border-slate-300/80 flex items-center justify-center text-[10px] font-medium text-slate-700">Item 01</div>
+                <div class="h-16 rounded-lg bg-slate-900 text-white flex items-center justify-center text-[10px] font-medium">Checkout</div>
+              </div>
+              <div class="text-[9px] text-slate-500 font-mono">Clean Minimalist Cart</div>
+            </div>
+
+            <!-- Title & Tags -->
+            <div class="space-y-2">
+              <h3 class="text-lg font-display font-bold text-white group-hover:text-cyan-300 transition-colors">
+                Artemis e-Comm
+              </h3>
+              
+              <!-- Tag Pills -->
+              <div class="flex flex-wrap gap-1.5">
+                <span class="px-2 py-0.5 rounded-full text-[10px] bg-white/5 text-slate-300 border border-white/5">UI/UX</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] bg-white/5 text-slate-300 border border-white/5">React</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] bg-white/5 text-slate-300 border border-white/5">3D</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] bg-white/5 text-slate-300 border border-white/5">WebGL</span>
+              </div>
+
+              <p class="text-xs text-slate-400 line-clamp-2 leading-relaxed">
+                Product UI to creative digital design, and animation, commerce design, customer problem UI starts.
+              </p>
+            </div>
+          </div>
+
+          <!-- Bottom Card Controls & Stats -->
+          <div class="pt-5 mt-4 border-t border-white/5 flex items-center justify-between">
+            <button class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white/10 hover:bg-white text-white hover:text-black transition-all flex items-center gap-1.5">
+              <span>View Case</span>
+              <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+            </button>
+            <div class="text-right">
+              <div class="text-xs font-bold font-display text-white">4.9 ★</div>
+              <div class="text-[10px] text-cyan-400 font-mono">Awwwards Nominee</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3: Nexio Platform -->
+        <article class="glass-card rounded-2xl p-5 flex flex-col justify-between group cursor-pointer" onclick="openProjectModal('nexio')">
+          <div class="space-y-4">
+            <!-- Thumbnail Visual -->
+            <div class="h-44 rounded-xl overflow-hidden bg-slate-900 border border-white/10 relative p-3 flex flex-col justify-between group-hover:border-blue-500/40 transition-colors">
+              <div class="flex items-center justify-between text-[10px] text-slate-400 border-b border-white/5 pb-1.5">
+                <span class="font-bold text-white">Nexio Platform</span>
+                <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+              </div>
+              <!-- Dashboard wave visual -->
+              <div class="my-auto space-y-2">
+                <div class="h-10 w-full rounded bg-blue-950/40 border border-blue-500/20 flex items-center px-2">
+                  <div class="w-full h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-500 rounded-full"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-1.5">
+                  <div class="h-5 rounded bg-white/5"></div>
+                  <div class="h-5 rounded bg-white/5"></div>
+                  <div class="h-5 rounded bg-white/5"></div>
+                </div>
+              </div>
+              <div class="text-[9px] text-slate-400 font-mono">Enterprise Console</div>
+            </div>
+
+            <!-- Title & Tags -->
+            <div class="space-y-2">
+              <h3 class="text-lg font-display font-bold text-white group-hover:text-blue-300 transition-colors">
+                Nexio Platform
+              </h3>
+              
+              <!-- Tag Pills -->
+              <div class="flex flex-wrap gap-1.5">
+                <span class="px-2 py-0.5 rounded-full text-[10px] bg-white/5 text-slate-300 border border-white/5">UI/UX</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] bg-white/5 text-slate-300 border border-white/5">React</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] bg-white/5 text-slate-300 border border-white/5">3D</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] bg-white/5 text-slate-300 border border-white/5">WebGL</span>
+              </div>
+
+              <p class="text-xs text-slate-400 line-clamp-2 leading-relaxed">
+                Dashboard preview to enterprise platform, decision implementation, responsive compositions.
+              </p>
+            </div>
+          </div>
+
+          <!-- Bottom Card Controls & Stats -->
+          <div class="pt-5 mt-4 border-t border-white/5 flex items-center justify-between">
+            <button class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white/10 hover:bg-white text-white hover:text-black transition-all flex items-center gap-1.5">
+              <span>View Case</span>
+              <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+            </button>
+            <div class="text-right">
+              <div class="text-xs font-bold font-display text-white">50k+</div>
+              <div class="text-[10px] text-blue-400 font-mono">Events / sec</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 4: Vibe Social -->
+        <article class="glass-card rounded-2xl p-5 flex flex-col justify-between group cursor-pointer" onclick="openProjectModal('vibe')">
+          <div class="space-y-4">
+            <!-- Thumbnail Visual -->
+            <div class="h-44 rounded-xl overflow-hidden bg-gradient-to-br from-purple-950/60 via-slate-900 to-black border border-white/10 relative p-3 flex flex-col justify-between group-hover:border-pink-500/40 transition-colors">
+              <div class="flex items-center justify-between text-[10px] text-slate-400 border-b border-white/5 pb-1.5">
+                <span class="font-bold text-pink-300">Vibe Feed</span>
+                <span class="text-[9px] text-slate-400">Live Audio</span>
+              </div>
+              <div class="my-auto flex items-center justify-center">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-500 via-pink-500 to-cyan-400 p-0.5 shadow-xl">
+                  <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
+                    <i data-lucide="sparkles" class="w-5 h-5 text-pink-300"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="text-[9px] text-slate-400 font-mono">Spatial Social Network</div>
+            </div>
+
+            <!-- Title & Tags -->
+            <div class="space-y-2">
+              <h3 class="text-lg font-display font-bold text-white group-hover:text-pink-300 transition-colors">
+                Vibe Social
+              </h3>
+              
+              <!-- Tag Pills -->
+              <div class="flex flex-wrap gap-1.5">
+                <span class="px-2 py-0.5 rounded-full text-[10px] bg-white/5 text-slate-300 border border-white/5">UI/UX</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] bg-white/5 text-slate-300 border border-white/5">React</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] bg-white/5 text-slate-300 border border-white/5">3D</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] bg-white/5 text-slate-300 border border-white/5">WebGL</span>
+              </div>
+
+              <p class="text-xs text-slate-400 line-clamp-2 leading-relaxed">
+                Interface shot of curated feed and social interface, modern and clean interface.
+              </p>
+            </div>
+          </div>
+
+          <!-- Bottom Card Controls & Stats -->
+          <div class="pt-5 mt-4 border-t border-white/5 flex items-center justify-between">
+            <button class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white/10 hover:bg-white text-white hover:text-black transition-all flex items-center gap-1.5">
+              <span>View Case</span>
+              <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+            </button>
+            <div class="text-right">
+              <div class="text-xs font-bold font-display text-white">Gen Z</div>
+              <div class="text-[10px] text-pink-400 font-mono">Community Hub</div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services" class="space-y-8 pt-8 border-t border-white/5">
+      <div>
+        <span class="text-xs uppercase font-mono tracking-widest text-cyan-400">Core Expertise</span>
+        <h2 class="text-2xl sm:text-4xl font-display font-bold text-white mt-1">What I Bring to Teams</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <div class="glass-card rounded-2xl p-6 space-y-4">
+          <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
+            <i data-lucide="figma" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-display font-bold text-white">Product & UI/UX Design</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Wireframes, interactive prototypes, and scalable Figma design systems crafted with obsessive attention to user flow and micro-interactions.
+          </p>
+          <div class="text-xs text-purple-300 font-mono">Figma • User Flows • Design Tokens</div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6 space-y-4">
+          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400">
+            <i data-lucide="code" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-display font-bold text-white">Creative Development</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Building performant web applications using modern JavaScript/TypeScript, React, Next.js, and fluid Tailwind CSS layouts.
+          </p>
+          <div class="text-xs text-cyan-300 font-mono">React • Next.js • Tailwind CSS • TypeScript</div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6 space-y-4">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+            <i data-lucide="box" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-display font-bold text-white">3D & WebGL Experiences</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Elevating brand digital experiences with Three.js, shaders, interactive canvases, and physics-based interactions.
+          </p>
+          <div class="text-xs text-emerald-300 font-mono">Three.js • GLSL • Framer Motion • Spline</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="glass-card rounded-3xl p-8 sm:p-12 border border-white/10 space-y-6">
+      <div class="max-w-3xl space-y-4">
+        <span class="text-xs uppercase font-mono tracking-widest text-purple-400">Background</span>
+        <h2 class="text-2xl sm:text-4xl font-display font-bold text-white">
+          Designing at the intersection of aesthetic beauty and engineering precision.
+        </h2>
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+          Hi, I'm Maesa. Over the past 4+ years, I've designed and shipped digital experiences for hyper-growth tech startups, SaaS teams, and boutique creative studios. My goal is always the same: simplify complex tasks without ever compromising on delight or visual craft.
+        </p>
+
+        <div class="pt-4 flex flex-wrap gap-4 text-xs font-mono text-slate-400">
+          <div class="flex items-center gap-1.5">
+            <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>
+            <span>Based in Philippines / Global Remote</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>
+            <span>Fluent in Design + Code</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="glass-card rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden border border-white/10">
+      <div class="max-w-2xl mx-auto space-y-6">
+        <span class="text-xs uppercase font-mono tracking-widest text-emerald-400">Get in Touch</span>
+        <h2 class="text-3xl sm:text-5xl font-display font-extrabold text-white">
+          Let’s bring your next project to life.
+        </h2>
+        <p class="text-sm text-slate-400 max-w-lg mx-auto">
+          I’m currently available for select freelance contracts, creative collaborations, and full-time roles.
+        </p>
+
+        <div class="pt-4 flex flex-wrap items-center justify-center gap-4">
+          <button id="contactCopyEmail" class="px-6 py-3 rounded-full text-xs font-semibold bg-white text-black hover:bg-slate-200 transition-all hover:scale-105 flex items-center gap-2 shadow-xl">
+            <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+            <span id="contactCopyLabel">Copy Email: maesa.creates@gmail.com</span>
+          </button>
+          
+          <a href="mailto:maesa.creates@gmail.com" class="px-5 py-3 rounded-full text-xs font-medium glass-card hover:bg-white/10 text-slate-300 hover:text-white transition-all">
+            Direct Mailto ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="max-w-7xl mx-auto px-4 sm:px-8 py-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+    <p>© <span id="year"></span> Maesa. Designed & engineered with craft.</p>
+    <div class="flex items-center gap-6">
+      <a href="https://github.com" target="_blank" class="hover:text-white transition-colors">GitHub</a>
+      <a href="https://linkedin.com" target="_blank" class="hover:text-white transition-colors">LinkedIn</a>
+      <a href="https://dribbble.com" target="_blank" class="hover:text-white transition-colors">Dribbble</a>
+      <a href="#hero" class="hover:text-white transition-colors">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <!-- INTERACTIVE CASE STUDY MODAL -->
+  <div id="projectModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="glass-card bg-[#0e111a] max-w-xl w-full rounded-2xl p-6 sm:p-8 space-y-6 border border-white/15 shadow-2xl relative transform scale-95 transition-transform duration-300" id="modalCard">
+      <button onclick="closeProjectModal()" class="absolute top-5 right-5 p-2 rounded-full hover:bg-white/10 text-slate-400 hover:text-white transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div>
+        <span id="modalCategory" class="text-xs font-mono uppercase tracking-wider text-purple-400">Featured Work</span>
+        <h3 id="modalTitle" class="text-2xl font-display font-bold text-white mt-1">Project Name</h3>
+      </div>
+
+      <div id="modalBanner" class="h-44 rounded-xl bg-slate-900 border border-white/10 flex items-center justify-center text-slate-400 text-sm font-mono">
+        Interactive Preview
+      </div>
+
+      <p id="modalDesc" class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+        Description content here.
+      </p>
+
+      <div class="pt-4 border-t border-white/5 flex items-center justify-between">
+        <div id="modalTags" class="flex flex-wrap gap-1.5">
+          <span class="px-2 py-0.5 rounded-full text-[10px] bg-white/5 text-slate-300">UI/UX</span>
+        </div>
+        <button onclick="closeProjectModal()" class="px-4 py-2 rounded-full text-xs font-semibold bg-white text-black hover:bg-slate-200 transition-colors">
+          Close Window
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 glass-card px-4 py-3 rounded-2xl border border-purple-500/30 text-white text-xs flex items-center gap-2 shadow-2xl opacity-0 pointer-events-none transition-all duration-300 transform translate-y-2">
+    <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>
+    <span>Email copied to clipboard!</span>
+  </div>
+
+  <!-- JAVASCRIPT & THREE.JS LOGIC -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile Menu Toggle
+    const mobileBtn = document.getElementById('mobileToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    document.querySelectorAll('.mobile-nav-link').forEach(l => l.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+    // Toast Notification System
+    const toast = document.getElementById('toast');
+    function copyEmail() {
+      navigator.clipboard.writeText('maesa.creates@gmail.com').then(() => {
+        toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-2');
+        toast.classList.add('opacity-100', 'translate-y-0');
+        setTimeout(() => {
+          toast.classList.remove('opacity-100', 'translate-y-0');
+          toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-2');
+        }, 3000);
+      });
+    }
+
+    document.getElementById('quickCopyEmail').addEventListener('click', copyEmail);
+    document.getElementById('contactCopyEmail').addEventListener('click', copyEmail);
+
+    // Modal Case Study Data
+    const projectDetails = {
+      quantum: {
+        title: "Quantum Analytics Platform",
+        category: "Fintech & WebGL Telemetry",
+        desc: "Designed and engineered a high-throughput financial telemetry platform handling real-time streams with sub-50ms latency. Implemented modular widget architecture and custom WebGL data visualizers.",
+        tags: ["UI/UX", "React", "3D", "WebGL", "Tailwind"],
+        bannerText: "Quantum Analytics • GPU Accelerated"
+      },
+      artemis: {
+        title: "Artemis e-Commerce Storefront",
+        category: "Creative Commerce & Brand",
+        desc: "A boutique luxury storefront focused on sensory photography, seamless product transitions, and a streamlined frictionless one-step checkout process with 42% higher conversion rate.",
+        tags: ["UI/UX", "Next.js", "Shopify", "Tailwind"],
+        bannerText: "Artemis • Minimalist Luxury"
+      },
+      nexio: {
+        title: "Nexio Cloud Platform",
+        category: "Enterprise Cloud Console",
+        desc: "Redesigned complex multi-cluster cloud management software. Reduced onboarding friction and system administration errors by introducing intuitive visual dependency trees.",
+        tags: ["UI/UX", "React", "TypeScript", "Design Systems"],
+        bannerText: "Nexio • Enterprise Console"
+      },
+      vibe: {
+        title: "Vibe Spatial Social Feed",
+        category: "Next-Gen Mobile & Web Social",
+        desc: "An experimental social audio and spatial canvas application featuring real-time collaborative avatars, fluid gestures, and personalized gradient identities.",
+        tags: ["UI/UX", "React Native", "Three.js", "WebRTC"],
+        bannerText: "Vibe Social • Spatial Hub"
+      }
+    };
+
+    const modal = document.getElementById('projectModal');
+    const modalCard = document.getElementById('modalCard');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalCategory = document.getElementById('modalCategory');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalBanner = document.getElementById('modalBanner');
+    const modalTags = document.getElementById('modalTags');
+
+    function openProjectModal(id) {
+      const p = projectDetails[id];
+      if (!p) return;
+      modalTitle.textContent = p.title;
+      modalCategory.textContent = p.category;
+      modalDesc.textContent = p.desc;
+      modalBanner.textContent = p.bannerText;
+      modalTags.innerHTML = p.tags.map(t => `<span class="px-2 py-0.5 rounded-full text-[10px] bg-white/5 text-slate-300 border border-white/5">${t}</span>`).join('');
+
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      modalCard.classList.remove('scale-95');
+      modalCard.classList.add('scale-100');
+    }
+
+    function closeProjectModal() {
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      modalCard.classList.add('scale-95');
+      modalCard.classList.remove('scale-100');
+    }
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeProjectModal();
+    });
+
+    // ==========================================
+    // THREE.JS INTERACTIVE 3D CLUSTER (Matching 3D Visual in Image)
+    // ==========================================
+    const container = document.getElementById('threeCanvasContainer');
+    if (container) {
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+      camera.position.z = 7;
+
+      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      container.appendChild(renderer);
+
+      // Group holding all 3D iridescent shapes
+      const cluster = new THREE.Group();
+      scene.add(cluster);
+
+      // Iridescent Metallic Material
+      const iridescentMaterial = new THREE.MeshPhysicalMaterial({
+        color: 0x9333ea,
+        emissive: 0x1e1035,
+        roughness: 0.18,
+        metalness: 0.9,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.1,
+        reflectivity: 0.9
+      });
+
+      const cyanMaterial = new THREE.MeshPhysicalMaterial({
+        color: 0x06b6d4,
+        emissive: 0x082f49,
+        roughness: 0.2,
+        metalness: 0.85,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.1
+      });
+
+      // 1. Central Torus Knot (acting as primary sculpted focal piece)
+      const centralKnotGeo = new THREE.TorusKnotGeometry(1.2, 0.35, 120, 20, 2, 3);
+      const centralKnot = new THREE.Mesh(centralKnotGeo, iridescentMaterial);
+      cluster.add(centralKnot);
+
+      // 2. Floating Torus Ring
+      const ringGeo = new THREE.TorusGeometry(0.8, 0.18, 16, 50);
+      const ring = new THREE.Mesh(ringGeo, cyanMaterial);
+      ring.position.set(-1.8, -1.1, 0.5);
+      ring.rotation.x = 1.2;
+      cluster.add(ring);
+
+      // 3. Floating 3D Cube
+      const cubeGeo = new THREE.BoxGeometry(0.75, 0.75, 0.75);
+      const cube = new THREE.Mesh(cubeGeo, iridescentMaterial);
+      cube.position.set(1.9, 1.4, 0.2);
+      cube.rotation.set(0.5, 0.7, 0.2);
+      cluster.add(cube);
+
+      // 4. Floating Octahedron (Diamond / Pyramid)
+      const octaGeo = new THREE.OctahedronGeometry(0.65, 0);
+      const octa = new THREE.Mesh(octaGeo, cyanMaterial);
+      octa.position.set(-1.6, 1.5, -0.4);
+      cluster.add(octa);
+
+      // 5. Floating Sphere
+      const sphereGeo = new THREE.SphereGeometry(0.28, 32, 32);
+      const sphere = new THREE.Mesh(sphereGeo, iridescentMaterial);
+      sphere.position.set(-2.2, 0.3, 0.8);
+      cluster.add(sphere);
+
+      // Lighting matching the atmospheric glow
+      const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+      scene.add(ambientLight);
+
+      const purpleLight = new THREE.PointLight(0xa855f7, 4, 20);
+      purpleLight.position.set(-4, 3, 5);
+      scene.add(purpleLight);
+
+      const cyanLight = new THREE.PointLight(0x06b6d4, 4, 20);
+      cyanLight.position.set(5, -3, 4);
+      scene.add(cyanLight);
+
+      const topLight = new THREE.DirectionalLight(0xffffff, 2);
+      topLight.position.set(0, 5, 5);
+      scene.add(topLight);
+
+      // Mouse Parallax Interaction
+      let mouseX = 0, mouseY = 0;
+      let targetX = 0, targetY = 0;
+
+      window.addEventListener('mousemove', (e) => {
+        const rect = container.getBoundingClientRect();
+        mouseX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+        mouseY = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
+      });
+
+      // Animation Loop
+      function animate() {
+        requestAnimationFrame(animate);
+
+        targetX += (mouseX - targetX) * 0.05;
+        targetY += (mouseY - targetY) * 0.05;
+
+        // Smooth floating & rotation
+        centralKnot.rotation.x += 0.006;
+        centralKnot.rotation.y += 0.008;
+
+        ring.rotation.x += 0.01;
+        ring.rotation.z += 0.007;
+
+        cube.rotation.x += 0.008;
+        cube.rotation.y += 0.005;
+
+        octa.rotation.y += 0.012;
+
+        cluster.rotation.y = targetX * 0.45;
+        cluster.rotation.x = -targetY * 0.35;
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      // Responsive Resize Handler
+      window.addEventListener('resize', () => {
+        if (!container) return;
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+      });
+    }
+  </script>
+</body>
+</html>
