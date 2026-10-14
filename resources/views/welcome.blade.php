@@ -182,11 +182,11 @@
                                 </div>
                             </div>
 
-                            <!-- Thumb 2: Adaptive Analysis -->
+                            <!-- Thumb 2: StudyForge -->
                             <div class="rounded-xl overflow-hidden bg-slate-900 border border-white/10 relative group/t">
-                                <img src="{{ asset('images/adaptive-analysis/dashboard.png') }}" alt="Adaptive Material Analysis" class="w-full h-24 object-cover object-top group-hover/t:scale-110 transition-transform duration-300">
+                                <img src="{{ asset('images/studyforge/landing.jpg') }}" alt="StudyForge Platform" class="w-full h-24 object-cover object-top group-hover/t:scale-110 transition-transform duration-300">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex items-end p-1.5">
-                                    <span class="text-[9px] font-mono text-purple-300 truncate font-semibold">Adaptive Sci-Tech</span>
+                                    <span class="text-[9px] font-mono text-purple-300 truncate font-semibold">StudyForge</span>
                                 </div>
                             </div>
 
@@ -406,15 +406,15 @@
                     </div>
                 </article>
 
-                <!-- WEB PROJECT 2: Adaptive Material Analysis -->
-                <article class="project-card glass-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between group cursor-pointer border border-white/10 hover:border-purple-500/40 transition-all shadow-xl" onclick="openProjectModal('adaptive')">
+                <!-- WEB PROJECT 2: StudyForge Adaptive Platform -->
+                <article class="project-card glass-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between group cursor-pointer border border-white/10 hover:border-purple-500/40 transition-all shadow-xl" onclick="openProjectModal('studyforge')">
                     <div class="space-y-5">
                         
                         <!-- App Mockup Visual with Real Screenshot -->
                         <div class="h-56 rounded-2xl overflow-hidden bg-slate-950 border border-white/10 relative flex flex-col justify-center group-hover:border-purple-500/40 transition-colors shadow-2xl">
                             <!-- Real Screenshot Image -->
                             <div class="relative w-full h-full overflow-hidden bg-slate-900 flex items-center justify-center">
-                                <img src="{{ asset('images/adaptive-analysis/dashboard.png') }}" alt="Adaptive Material Analysis Dashboard" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                                <img src="{{ asset('images/studyforge/landing.jpg') }}" alt="StudyForge Platform" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
                             </div>
                         </div>
@@ -423,7 +423,7 @@
                         <div class="space-y-2">
                             <div class="flex items-center justify-between">
                                 <h3 class="text-xl sm:text-2xl font-display font-bold text-white group-hover:text-purple-300 transition-colors">
-                                    Adaptive Material Analysis
+                                    StudyForge Platform
                                 </h3>
                                 <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-400 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
                             </div>

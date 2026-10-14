@@ -257,12 +257,12 @@ document.addEventListener('DOMContentLoaded', () => {
             category: "Full-Stack EdTech • AI Material Analysis & Gamified Learning",
             desc: "An intelligent adaptive learning platform engineered with Vue 3, Pinia, Laravel, and Three.js. It ingests diverse study sources—including PDFs, lecture slide decks (PPTX), full-course video lectures, and text notes—and executes structured semantic analysis. The engine automatically extracts key concepts, cross-source knowledge connections, and generated topic taxonomies to produce interactive gamified learning worlds, progress tracking, and 3D assessments.",
             tags: ["Vue 3", "Laravel", "AI Analysis", "Pinia", "Three.js", "Tailwind CSS", "Gamified Learning"],
-            liveUrl: "http://127.0.0.1:8000",
             images: [
-                { src: "/images/adaptive-analysis/analysis.png", label: "Review & Analysis Engine" },
-                { src: "/images/adaptive-analysis/dashboard.png", label: "Learning Worlds Library" },
-                { src: "/images/adaptive-analysis/assessments.png", label: "3D Dynamic Assessments" },
-                { src: "/images/adaptive-analysis/worlds.png", label: "Learning Sets & Progress" }
+                { src: "/images/studyforge/landing.jpg", label: "Learning Journey Landing" },
+                { src: "/images/studyforge/room.png", label: "Interactive 3D Study Room" },
+                { src: "/images/studyforge/profile.png", label: "Student Profile & Vessel" },
+                { src: "/images/studyforge/login.png", label: "Account Authentication" },
+                { src: "/images/studyforge/loading.png", label: "Gamified Loading Screen" }
             ]
         },
         studyforge: {
@@ -270,12 +270,12 @@ document.addEventListener('DOMContentLoaded', () => {
             category: "Full-Stack EdTech • AI Material Analysis & Gamified Learning",
             desc: "An intelligent adaptive learning platform engineered with Vue 3, Pinia, Laravel, and Three.js. It ingests diverse study sources—including PDFs, lecture slide decks (PPTX), full-course video lectures, and text notes—and executes structured semantic analysis. The engine automatically extracts key concepts, cross-source knowledge connections, and generated topic taxonomies to produce interactive gamified learning worlds, progress tracking, and 3D assessments.",
             tags: ["Vue 3", "Laravel", "AI Analysis", "Pinia", "Three.js", "Tailwind CSS", "Gamified Learning"],
-            liveUrl: "http://127.0.0.1:8000",
             images: [
-                { src: "/images/adaptive-analysis/analysis.png", label: "Review & Analysis Engine" },
-                { src: "/images/adaptive-analysis/dashboard.png", label: "Learning Worlds Library" },
-                { src: "/images/adaptive-analysis/assessments.png", label: "3D Dynamic Assessments" },
-                { src: "/images/adaptive-analysis/worlds.png", label: "Learning Sets & Progress" }
+                { src: "/images/studyforge/landing.jpg", label: "Learning Journey Landing" },
+                { src: "/images/studyforge/room.png", label: "Interactive 3D Study Room" },
+                { src: "/images/studyforge/profile.png", label: "Student Profile & Vessel" },
+                { src: "/images/studyforge/login.png", label: "Account Authentication" },
+                { src: "/images/studyforge/loading.png", label: "Gamified Loading Screen" }
             ]
         }
     };

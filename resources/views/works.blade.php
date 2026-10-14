@@ -285,7 +285,7 @@
             </article>
 
             <!-- PROJECT 2: StudyForge Adaptive Material Analysis -->
-            <article class="project-item glass-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between group cursor-pointer border border-white/10 hover:border-purple-500/40 transition-all shadow-xl" data-category="web" data-keywords="vue vue3 laravel studyforge adaptive analysis material ai threejs edtech pinia tailwind" onclick="openProjectModal('adaptive')">
+            <article class="project-item glass-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between group cursor-pointer border border-white/10 hover:border-purple-500/40 transition-all shadow-xl" data-category="web" data-keywords="vue vue3 laravel studyforge adaptive analysis material ai threejs edtech pinia tailwind" onclick="openProjectModal('studyforge')">
                 <div class="space-y-5">
                     
                     <!-- Preview Image -->
@@ -298,7 +298,7 @@
                         </div>
 
                         <div class="relative w-full h-full overflow-hidden bg-slate-900 flex items-center justify-center">
-                            <img src="{{ asset('images/adaptive-analysis/dashboard.png') }}" alt="StudyForge Adaptive Analysis Dashboard" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                            <img src="{{ asset('images/studyforge/landing.jpg') }}" alt="StudyForge Adaptive Analysis Dashboard" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent"></div>
                         </div>
 
