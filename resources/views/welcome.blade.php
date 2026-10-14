@@ -394,7 +394,11 @@
 
                     </div>
 
-                    <div class="pt-5 mt-4 border-t border-white/5 flex items-center justify-end text-xs">
+                    <div class="pt-5 mt-4 border-t border-white/5 flex items-center justify-between text-xs">
+                        <a href="https://kofeemanila.infinityfree.io/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="px-3.5 py-1.5 rounded-full bg-amber-500/15 text-amber-300 hover:bg-amber-400 hover:text-black border border-amber-500/30 font-semibold flex items-center gap-1.5 transition-all shadow-sm">
+                            <i data-lucide="globe" class="w-3.5 h-3.5"></i>
+                            <span>View Website</span>
+                        </a>
                         <span class="text-slate-400 font-semibold group-hover:text-white flex items-center gap-1">
                             <span>View Details</span>
                             <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>

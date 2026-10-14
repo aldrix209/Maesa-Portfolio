@@ -159,7 +159,7 @@
 
             <div class="pt-4 border-t border-white/5 flex items-center justify-end gap-2">
                 <a id="modalLiveBtn" href="#" target="_blank" rel="noopener noreferrer" class="star-border hidden px-4 py-2 rounded-full text-xs font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white transition-all items-center gap-1.5 shadow-lg shadow-purple-600/30" data-star-color="#38bdf8" data-star-sparkle="true">
-                    <span>Launch Live App</span>
+                    <span>View Website</span>
                     <i data-lucide="external-link" class="w-3 h-3"></i>
                 </a>
                 <button onclick="closeProjectModal()" class="star-border px-5 py-2 rounded-full text-xs font-semibold bg-white text-black hover:bg-slate-200 transition-colors shadow-lg" data-star-color="#c084fc">

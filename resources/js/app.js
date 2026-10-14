@@ -230,6 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
             category: "Commercial ERP • Food Service Point-of-Sale",
             desc: "A modern commercial POS and management ecosystem engineered for artisan coffee shops. Integrates an aesthetic storefront showcasing signature roasts with an operator-ready Point of Sale terminal. Includes real-time Dine-in/Take-out cart calculations, automated 12% VAT, size switchers (Regular 16oz / Large 22oz), category tabs, and comprehensive back-office operations for inventory, order history, and payroll finance.",
             tags: ["JavaScript", "Commercial POS", "Inventory", "Finance", "Storefront", "VAT Engine"],
+            liveUrl: "https://kofeemanila.infinityfree.io/",
             images: [
                 { src: "/images/brewvanti/pos-terminal.png", label: "POS Terminal" },
                 { src: "/images/brewvanti/landing.png", label: "Artisan Storefront" },
