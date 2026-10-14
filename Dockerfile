@@ -7,7 +7,7 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Production PHP Apache server
-FROM php:8.3-apache
+FROM php:8.4-apache
 
 # Install system dependencies & PHP extensions
 RUN apt-get update && apt-get install -y \
@@ -18,9 +18,10 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     zip \
     unzip \
+    libzip-dev \
     sqlite3 \
     libsqlite3-dev \
-    && docker-php-ext-install pdo pdo_sqlite mbstring bcmath gd \
+    && docker-php-ext-install pdo pdo_sqlite mbstring bcmath gd zip \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Composer
@@ -38,7 +39,7 @@ COPY . .
 COPY --from=frontend /app/public/build ./public/build
 
 # Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+RUN composer install --no-dev --optimize-autoloader --no-interaction --ignore-platform-req=php+
 
 # Setup SQLite database and directory permissions
 RUN mkdir -p storage/framework/sessions \
