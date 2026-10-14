@@ -233,10 +233,7 @@
                     <div class="h-56 rounded-2xl overflow-hidden bg-gradient-to-br from-[#1a1510] via-slate-950 to-black border border-white/10 relative flex flex-col justify-between group-hover:border-amber-500/40 transition-colors shadow-2xl">
                         <div class="flex items-center justify-between text-xs text-slate-400 border-b border-white/10 px-4 py-2 bg-slate-900/90 backdrop-blur z-10">
                             <div class="flex items-center gap-1.5">
-                                <span class="w-2 h-2 rounded-full bg-red-500/80"></span>
-                                <span class="w-2 h-2 rounded-full bg-amber-500/80"></span>
-                                <span class="w-2 h-2 rounded-full bg-emerald-500/80"></span>
-                                <span class="font-mono text-[11px] text-slate-300 ml-2">BrewVanti POS • Commercial</span>
+                                <span class="font-mono text-[11px] text-slate-300">BrewVanti POS • Commercial</span>
                             </div>
                             <span class="text-[10px] font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-full">Real-time Orders</span>
                         </div>
@@ -295,10 +292,7 @@
                     <div class="h-56 rounded-2xl overflow-hidden bg-slate-950 border border-white/10 relative flex flex-col justify-between group-hover:border-purple-500/40 transition-colors shadow-2xl">
                         <div class="flex items-center justify-between text-xs text-slate-400 border-b border-white/10 px-4 py-2 bg-slate-900/90 backdrop-blur z-10">
                             <div class="flex items-center gap-1.5">
-                                <span class="w-2 h-2 rounded-full bg-red-500/80"></span>
-                                <span class="w-2 h-2 rounded-full bg-amber-500/80"></span>
-                                <span class="w-2 h-2 rounded-full bg-emerald-500/80"></span>
-                                <span class="font-mono text-[11px] text-slate-300 ml-2">StudyForge • EdTech</span>
+                                <span class="font-mono text-[11px] text-slate-300">StudyForge • EdTech</span>
                             </div>
                             <span class="text-[10px] font-mono text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded-full">AI Synthesis</span>
                         </div>
@@ -354,10 +348,7 @@
                     <div class="h-56 rounded-2xl overflow-hidden bg-slate-900 border border-white/10 relative flex flex-col justify-between group-hover:border-cyan-500/40 transition-colors shadow-2xl">
                         <div class="flex items-center justify-between text-xs text-slate-400 border-b border-white/10 px-4 py-2 bg-slate-900/90 backdrop-blur z-10">
                             <div class="flex items-center gap-1.5">
-                                <span class="w-2 h-2 rounded-full bg-red-500/80"></span>
-                                <span class="w-2 h-2 rounded-full bg-amber-500/80"></span>
-                                <span class="w-2 h-2 rounded-full bg-emerald-500/80"></span>
-                                <span class="font-mono text-[11px] text-slate-300 ml-2">AppointMed • Clinical System</span>
+                                <span class="font-mono text-[11px] text-slate-300">AppointMed • Clinical System</span>
                             </div>
                             <span class="text-[10px] font-mono text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-full">Patient Portal</span>
                         </div>
